@@ -300,7 +300,8 @@ function cot_parse_bbcode($text)
 
 			case 'callback':
 				$phpcode = 'global $cfg, $sys, $usr, $L, $theme, $cot_groups;'.$bbcode['replacement'];
-				$text = preg_replace_callback('`'.$bbcode['pattern'].'`mis', create_function('$input', $phpcode), $text);
+				//$text = preg_replace_callback('`'.$bbcode['pattern'].'`mis', create_function('$input', $phpcode), $text);
+				$text = preg_replace_callback('`'.$bbcode['pattern'].'`mis', function($input) use ($phpcode) { return $phpcode; }, $text);
 			break;
 		}
 	}
